@@ -1,0 +1,22 @@
+October 31, 2025 from 10:40 to 11:10 at HRBB 113:
+Agenda:
+  - Re-evaluated frontend techstack options
+  - Discussed project timeline
+Things accomplished:
+  - Assigned story points and split up tasks
+  - Finished setting up GitHub
+  - Re-evalutated our project 2 
+  - Started installing packages for project 3
+Next steps:
+  - Finalize techstack 
+  - Begin development
+  - Implement UI Designs
+Tasks assigned:
+  - Download techstacks
+  - Manager view development to Jyo and Andrew
+  - Cashier view development to Sriya and Ben
+Internal Deadlines:
+  - Have the frontend development done for Manager, Cashier and inventory board by Wednesday - 10/05
+Important notes:
+  -  Current techstack we are looking at: node.js, next.js, react.js
+

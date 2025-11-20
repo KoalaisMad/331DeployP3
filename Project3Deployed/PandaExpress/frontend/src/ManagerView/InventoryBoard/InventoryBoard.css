@@ -1,0 +1,86 @@
+.inventory-page.full-viewport {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100vh; 
+  padding: 20px 24px 96px 24px;
+  background: linear-gradient(135deg,#fff7e6,#ffe6f0);
+  color: #222;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.inventory-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:1rem;
+}
+
+.inventory-title{
+  font-size:1.6rem;
+  color:#2b2b2b;
+  margin:0;
+}
+
+.translation-pill{
+  background:#2b2b2b;
+  color:#fff;
+  padding:0.4rem 0.6rem;
+  border-radius:999px;
+  font-size:0.85rem;
+  display:flex;
+  gap:0.4rem;
+  align-items:center;
+}
+
+.inventory-columns{
+  display:grid;
+  grid-template-columns: 2fr 1fr 1fr 80px;
+  gap:0.5rem;
+  font-weight:700;
+  color:#444;
+  padding:0.5rem 0;
+}
+
+.inventory-list{
+  margin-top:0.75rem;
+  display:flex;
+  flex-direction:column;
+  gap:0.5rem;
+  flex: 1 1 auto; 
+  min-height: 0; 
+}
+
+.inventory-list.scrollable { overflow-y: auto; padding-right: 8px }
+
+.inventory-row{
+  display:grid;
+  grid-template-columns: 2fr 1fr 1fr auto;
+  align-items:center;
+  gap:0.5rem;
+  padding:0.6rem;
+  border-radius:6px;
+  background:rgba(255,255,255,0.95);
+  box-shadow:0 1px 3px rgba(0,0,0,0.05);
+}
+
+.row-left{display:flex;align-items:center;gap:0.6rem}
+.item-dot{width:12px;height:12px;border-radius:50%;background:#ff6b6b}
+.item-name{font-weight:600}
+.status-badge{padding:0.25rem 0.6rem;border-radius:12px;font-weight:600}
+.status-badge.running-low{background:#ffcccb;color:#6b0000}
+.status-badge.low{background:#fff3cd;color:#856404}
+.status-badge.in-stock{background:#d4edda;color:#155724}
+.quantity-box{background:#f0f0f0;padding:0.4rem 0.6rem;border-radius:4px;font-weight:700}
+.quantity-input{background:#f0f0f0;border:1px solid #ddd;color:#222;padding:0.35rem 0.5rem;border-radius:4px;font-weight:700;text-align:center}
+.btn-remove{background:#c8102e;color:white;border:none;padding:0.5rem 0.8rem;border-radius:6px;cursor:pointer}
+
+.update-wrapper{position:fixed;right:28px;bottom:28px}
+.btn-update{background:#17a2b8;color:white;border:none;padding:0.7rem 1.2rem;border-radius:6px;cursor:pointer}
+.continued-text{color:#666;margin-top:0.6rem;font-style:italic}
+
+
+.add-form{display:flex;gap:0.5rem;align-items:center;margin-bottom:0.75rem}
+.add-input{padding:0.5rem 0.6rem;border-radius:6px;border:1px solid #ddd;background:white}
+.add-select{padding:0.45rem 0.6rem;border-radius:6px;border:1px solid #ddd;background:white}
+.btn-add{background:#28a745;color:white;border:none;padding:0.6rem 0.9rem;border-radius:6px;cursor:pointer}
