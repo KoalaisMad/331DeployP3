@@ -13,6 +13,12 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+// Serve React build in production BEFORE API routes
+if (process.env.NODE_ENV === 'production') {
+  const buildPath = path.join(process.cwd(), 'frontend', 'build');
+  app.use(express.static(buildPath));
+}
+
 // Example route that queries data
 app.get("/api/employees", async (req, res) => {
   try {
@@ -1069,16 +1075,13 @@ app.get('/api/appetizer-drink-image/:id', async (req, res) => {
     console.error('Error fetching image:', err);
     return res.status(500).json({ error: 'Failed to fetch image' });
   }
-});
+  });
 
-// If running in production, serve the React build so the frontend and backend
-// are served from the same origin. This keeps the app's existing relative
-// `/api/...` calls working without changing frontend code.
+// Catch-all handler for React Router (must be AFTER all API routes)
 if (process.env.NODE_ENV === 'production') {
   const buildPath = path.join(process.cwd(), 'frontend', 'build');
-  app.use(express.static(buildPath));
-
-  app.get('*', (req, res) => {
+  
+  app.get('/*', (req, res) => {
     res.sendFile(path.join(buildPath, 'index.html'));
   });
 }
