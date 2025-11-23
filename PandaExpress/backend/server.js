@@ -2,12 +2,13 @@ import express from "express";
 import cors from "cors";
 import pool from "./db.js";
 import multer from "multer";
+import path from 'path';
 
 
 
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
@@ -1069,3 +1070,15 @@ app.get('/api/appetizer-drink-image/:id', async (req, res) => {
     return res.status(500).json({ error: 'Failed to fetch image' });
   }
 });
+
+// If running in production, serve the React build so the frontend and backend
+// are served from the same origin. This keeps the app's existing relative
+// `/api/...` calls working without changing frontend code.
+if (process.env.NODE_ENV === 'production') {
+  const buildPath = path.join(process.cwd(), 'frontend', 'build');
+  app.use(express.static(buildPath));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(buildPath, 'index.html'));
+  });
+}
