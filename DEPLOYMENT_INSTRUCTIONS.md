@@ -90,6 +90,37 @@ This means the frontend build is missing!
 2. Make sure environment variables are set correctly
 3. Verify TAMU database is accessible from Render's IPs
 
+### Manager Portal Not Working:
+
+**Most Common Issue:** Frontend was built with hardcoded `localhost:5000` URLs before the fix.
+
+**Solution:**
+1. In Render dashboard, trigger **"Manual Deploy" → "Clear build cache & deploy"**
+2. This rebuilds frontend with the correct relative API paths (`/api` instead of `localhost:5000/api`)
+3. Wait for deployment to complete
+4. Test manager features
+
+**Check Browser Console:**
+Open browser DevTools (F12) and check Console/Network tabs for:
+- CORS errors
+- 404 Not Found errors  
+- Failed fetch calls
+- Database connection errors
+
+**Verify Environment Variables on Render:**
+Make sure these are set in Render dashboard:
+- `PGHOST=csce-315-db.engr.tamu.edu`
+- `PGPORT=5432`
+- `PGDATABASE=group_10_db`
+- `PGUSER=group_10`
+- `PGPASSWORD=koalas428TheWWWin`
+
+**Test API Endpoints Directly:**
+- `/api/health` - Check server status
+- `/api/employees` - Should return employee list
+- `/api/inventory` - Should return inventory data
+- `/api/reports/z-report-status` - Should return report status
+
 ### Local Testing:
 ```bash
 # Build frontend first
