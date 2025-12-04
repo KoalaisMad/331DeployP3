@@ -51,10 +51,17 @@ Click **"Advanced"** → **"Add Environment Variable"** and add these:
 
 ## Verify Deployment
 
-Test these endpoints:
-- `https://your-app.onrender.com/` - Should serve the React frontend
+### Check Health Status First:
+- `https://your-app.onrender.com/api/health` - Should return `{"status":"ok","frontendBuildExists":true}`
+
+If `frontendBuildExists` is `false`, the build command didn't run properly!
+
+### Test API Endpoints:
 - `https://your-app.onrender.com/api/employees` - Should return employee data
 - `https://your-app.onrender.com/api/inventory` - Should return inventory data
+
+### Test Frontend:
+- `https://your-app.onrender.com/` - Should serve the React frontend
 
 ## What Changed?
 
@@ -65,14 +72,37 @@ This fixes Render's path resolution - everything is where it expects!
 
 ## Troubleshooting
 
-If build fails:
-1. Check the build logs in Render dashboard
+### "Not Found" Error (Most Common)
+This means the frontend build is missing!
+
+**Quick Fix:**
+1. Visit `https://your-app.onrender.com/api/health`
+2. Check if `frontendBuildExists: false`
+3. If false, the build command didn't complete - check Render build logs
+
+**Solution:**
+- Ensure build command is: `npm --prefix backend install && npm --prefix frontend install && npm --prefix frontend run build`
+- Check Render logs for build errors
+- Trigger a manual redeploy in Render dashboard
+
+### Build Failures:
+1. Check the build logs in Render dashboard for specific errors
 2. Make sure environment variables are set correctly
 3. Verify TAMU database is accessible from Render's IPs
+
+### Local Testing:
+```bash
+# Build frontend first
+cd frontend && npm install && npm run build && cd ..
+
+# Start backend
+cd backend && npm install && npm start
+```
+Visit `http://localhost:5000` - should work!
 
 ## Need Help?
 
 The deployment should work now! If you still have issues:
-1. Check Render build logs for specific errors
-2. Verify database credentials
-3. Ensure frontend builds successfully locally with `cd frontend && npm run build`
+1. Check `/api/health` endpoint first
+2. Review Render build logs for specific errors
+3. Verify all environment variables are set
