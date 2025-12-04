@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-const API_BASE = 'http://localhost:5000/api';
+// Use relative path for API calls - works both locally and deployed
+const API_BASE = '/api';
 
 export default function ItemsSales() {
   // Product Usage (inventory) time window - defaults, can be changed in UI

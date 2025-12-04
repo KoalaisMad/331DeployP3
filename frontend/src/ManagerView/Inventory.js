@@ -2,7 +2,8 @@ import React, { useEffect, useState, useRef } from 'react';
 
 export default function Inventory() {
 
-  const API_BASE = 'http://localhost:5000/api';
+  // Use relative path - works both locally and on deployed server
+  const API_BASE = '/api';
 
   async function apiFetch(path, options = {}) {
   return fetch(`${API_BASE}${path}`, options);
