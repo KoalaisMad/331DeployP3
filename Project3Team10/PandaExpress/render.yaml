@@ -12,6 +12,7 @@ services:
     name: panda-express
     runtime: node
     plan: free
+    rootDir: Project3Team10/PandaExpress
     buildCommand: npm --prefix backend install && npm --prefix frontend install && npm --prefix frontend run build
     startCommand: npm --prefix backend start
     envVars:
