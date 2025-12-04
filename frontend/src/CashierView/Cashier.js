@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './Cashier.css';
 
-const API_BASE = 'http://localhost:5000/api';
+// Use relative path - works both locally and on deployed server
+const API_BASE = '/api';
 
 // Compatibility wrapper: many frontend calls use top-level paths
 // (e.g. `/sizes/prices`) but inventory endpoints were moved under
