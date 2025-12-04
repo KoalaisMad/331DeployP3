@@ -1,0 +1,115 @@
+[dotenv@17.2.3] injecting env (7) from ../.env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+Server running on http://localhost:5000
+Server running on http://localhost:5000
+Connected to database at: 2025-11-24T06:15:41.152Z
+Fetching kitchen orders...
+Found 9 current orders
+Found 6 past orders
+Successfully fetched all kitchen orders
+📤 Sending to frontend: 9 current, 6 past
+Sample current order: {
+  "id": 173599,
+  "timestamp": "2025-11-24T08:35:17.924Z",
+  "cost": 11.6,
+  "size": "Plate",
+  "entrees": [
+    "Kung Pao Chicken (Plate)",
+    "Broccoli Beef (Plate)"
+  ],
+  "sides": [
+    "Fried Rice (Plate)"
+  ],
+  "appetizers": [
+    "Spring Roll"
+  ]
+}
+Sample past order: {
+  "id": 173610,
+  "timestamp": "2025-11-24T09:47:39.667Z",
+  "cost": 11.6,
+  "size": "Plate",
+  "entrees": [
+    "Kung Pao Chicken (Plate)",
+    "Broccoli Beef (Plate)"
+  ],
+  "sides": [
+    "Fried Rice (Plate)"
+  ],
+  "appetizers": [
+    "Spring Roll"
+  ]
+}
+Fetching kitchen orders...
+Found 9 current orders
+Found 6 past orders
+Successfully fetched all kitchen orders
+📤 Sending to frontend: 9 current, 6 past
+Sample current order: {
+  "id": 173599,
+  "timestamp": "2025-11-24T08:35:17.924Z",
+  "cost": 11.6,
+  "size": "Plate",
+  "entrees": [
+    "Kung Pao Chicken (Plate)",
+    "Broccoli Beef (Plate)"
+  ],
+  "sides": [
+    "Fried Rice (Plate)"
+  ],
+  "appetizers": [
+    "Spring Roll"
+  ]
+}
+Sample past order: {
+  "id": 173610,
+  "timestamp": "2025-11-24T09:47:39.667Z",
+  "cost": 11.6,
+  "size": "Plate",
+  "entrees": [
+    "Kung Pao Chicken (Plate)",
+    "Broccoli Beef (Plate)"
+  ],
+  "sides": [
+    "Fried Rice (Plate)"
+  ],
+  "appetizers": [
+    "Spring Roll"
+  ]
+}
+Fetching kitchen orders...
+Found 9 current orders
+Found 6 past orders
+Successfully fetched all kitchen orders
+📤 Sending to frontend: 9 current, 6 past
+Sample current order: {
+  "id": 173599,
+  "timestamp": "2025-11-24T08:35:17.924Z",
+  "cost": 11.6,
+  "size": "Plate",
+  "entrees": [
+    "Kung Pao Chicken (Plate)",
+    "Broccoli Beef (Plate)"
+  ],
+  "sides": [
+    "Fried Rice (Plate)"
+  ],
+  "appetizers": [
+    "Spring Roll"
+  ]
+}
+Sample past order: {
+  "id": 173610,
+  "timestamp": "2025-11-24T09:47:39.667Z",
+  "cost": 11.6,
+  "size": "Plate",
+  "entrees": [
+    "Kung Pao Chicken (Plate)",
+    "Broccoli Beef (Plate)"
+  ],
+  "sides": [
+    "Fried Rice (Plate)"
+  ],
+  "appetizers": [
+    "Spring Roll"
+  ]
+}

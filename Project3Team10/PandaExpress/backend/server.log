@@ -1,0 +1,11 @@
+file:///Users/jyoshithamadhavarapu/Desktop/CSCE_331/Project3Team10/PandaExpress/backend/server.js:1678
+>>>>>>> KitchenBoard
+^^^
+
+SyntaxError: Unexpected token '>>>'
+    at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:169:18)
+    at callTranslator (node:internal/modules/esm/loader:272:14)
+    at ModuleLoader.moduleProvider (node:internal/modules/esm/loader:278:30)
+    at async link (node:internal/modules/esm/module_job:78:21)
+
+Node.js v20.16.0

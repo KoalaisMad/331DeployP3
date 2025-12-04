@@ -1,0 +1,19 @@
+Sprint Retrospective Meeting
+what went right and wrong during the previous sprint
+- Completing the kiosk early -> went well
+- Getting the API key and calling the weather API -> went well
+- adding images to the database for each menu item -> went well
+- Collaboration and communication across the team
+- Went wrong
+- Getting views to interact with one another
+- sending data across views
+- finding the correct api call to implement the music feature
+
+what changes (if any) need to be made regarding procedure
+- try to meet our internal deadlines - more efficiently
+- Have small team meeting to merge as we go rather than merging at the end
+
+what adjustments might need to be made to the product backlog 
+- not doing rewards for our extra feature
+- we are doing soundcloud api instead
+- We are currently on track with planned product backlog
