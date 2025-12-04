@@ -41,14 +41,7 @@ npm --prefix backend start
 
 Click **"Advanced"** → **"Add Environment Variable"** and add these:
 
-```
-NODE_ENV=production
-PGHOST=csce-315-db.engr.tamu.edu
-PGPORT=5432
-PGDATABASE=group_10_db
-PGUSER=group_10
-PGPASSWORD=koalas428TheWWWin
-```
+
 
 ### Step 5: Deploy!
 
