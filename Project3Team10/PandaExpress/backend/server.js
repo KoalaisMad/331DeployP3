@@ -50,6 +50,18 @@ pool.query("SELECT NOW()", (err, result) => {
   else console.log("Connected to database at:", result.rows[0].now);
 });
 
+// Catch-all handler to serve React's index.html for any non-API routes
+// This must be AFTER all API routes
+// Use middleware approach to avoid path-to-regexp issues with '*' in Express 5
+app.use((req, res, next) => {
+  // If we get here and the route wasn't handled by API routes, serve React
+  if (!req.path.startsWith('/api/')) {
+    res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+  } else {
+    next();
+  }
+});
+
 // single app.listen (remove duplicates in original)
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
