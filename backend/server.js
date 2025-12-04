@@ -35,6 +35,15 @@ app.use("/api/kitchen", kitchenRouter);
 app.use("/api/images", imagesRouter);
 app.use("/api/link", linksRouter);
 
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.json({ 
+    status: 'ok', 
+    timestamp: new Date().toISOString(),
+    frontendBuildExists: require('fs').existsSync(path.join(__dirname, '../frontend/build/index.html'))
+  });
+});
+
 // Compatibility: mount inventory routes at top-level /api so older frontend
 // requests like `/api/sizes` or `/api/sides` continue to work without
 // rebuilding the frontend bundle.
@@ -56,7 +65,19 @@ pool.query("SELECT NOW()", (err, result) => {
 app.use((req, res, next) => {
   // If we get here and the route wasn't handled by API routes, serve React
   if (!req.path.startsWith('/api/')) {
-    res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+    const indexPath = path.join(__dirname, '../frontend/build', 'index.html');
+    const fs = require('fs');
+    
+    if (fs.existsSync(indexPath)) {
+      res.sendFile(indexPath);
+    } else {
+      // Frontend build doesn't exist - provide helpful error
+      res.status(503).json({
+        error: 'Frontend not built',
+        message: 'The frontend build directory does not exist. Run: npm --prefix frontend run build',
+        buildPath: indexPath
+      });
+    }
   } else {
     next();
   }
