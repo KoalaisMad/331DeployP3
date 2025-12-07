@@ -1,0 +1,342 @@
+:root {
+  --panda-red: #E21B24;
+  --panda-red-dark: #B2181D;
+  --panda-red-light: #F9D7D7;
+  --panda-muted: #666;
+  --panda-accent-shadow: rgba(226, 27, 36, 0.12);
+}
+
+.landing-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #fff 0%, #fff7f6 60%, #fff3f3 100%);
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+.landing-header {
+  background: linear-gradient(90deg, var(--panda-red), var(--panda-red-dark));
+  color: white;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 6px 18px var(--panda-accent-shadow);
+  text-align: center;
+}
+
+.landing-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.landing-title {
+  font-size: 2.5rem;
+  color: white;
+  margin: 0;
+  font-weight: 700;
+}
+
+.landing-subtitle {
+  font-size: 1.3rem;
+  color: var(--panda-muted);
+  margin-bottom: 50px;
+  font-weight: 400;
+  margin-top: 20px;
+}
+
+.role-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.role-card {
+  background: linear-gradient(180deg, #ffffff 0%, #fff8f8 100%);
+  border-radius: 10px;
+  padding: 40px 30px;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.role-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--panda-red);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.role-card:hover::before {
+  transform: scaleX(1);
+}
+
+.role-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12), 0 12px 30px var(--panda-accent-shadow);
+  border-color: rgba(226, 27, 36, 0.14);
+}
+
+.customer-card:hover {
+  border-top: 1px solid var(--panda-red);
+}
+
+.cashier-card:hover {
+  border-top: 1px solid var(--panda-red);
+}
+
+.manager-card:hover {
+  border-top: 1px solid var(--panda-red);
+}
+
+.role-icon {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--panda-red-light), rgba(226, 27, 36, 0.05));
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(226, 27, 36, 0.15);
+  transition: all 0.3s ease;
+  color: var(--panda-red);
+}
+
+.role-icon svg {
+  width: 60px;
+  height: 60px;
+}
+
+.role-card:hover .role-icon {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(226, 27, 36, 0.25);
+}
+
+.role-card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #333;
+  font-weight: 600;
+}
+
+.role-card p {
+  color: var(--panda-muted);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .landing-title {
+    font-size: 2rem;
+  }
+
+  .landing-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+  }
+
+  .role-cards {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .role-card {
+    padding: 30px 20px;
+  }
+
+  .role-icon {
+    width: 100px;
+    height: 100px;
+  }
+
+  .role-icon svg {
+    width: 50px;
+    height: 50px;
+  }
+
+  .role-card h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-title {
+    font-size: 1.8rem;
+  }
+
+  .landing-subtitle {
+    font-size: 1rem;
+  }
+
+  .role-card {
+    padding: 25px 15px;
+    min-height: 200px;
+  }
+
+  .landing-header {
+    padding: 1rem;
+  }
+
+  .landing-container {
+    padding: 20px 15px;
+  }
+
+  .role-cards {
+    gap: 15px;
+    padding: 10px;
+  }
+
+  .pin-modal {
+    margin: 0 15px;
+    padding: 25px;
+  }
+
+  .pin-input {
+    font-size: 1.1rem;
+    padding: 12px;
+  }
+}
+
+/* PIN Modal Styles */
+.pin-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.pin-modal {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 90%;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.pin-modal h3 {
+  margin: 0 0 25px 0;
+  color: var(--panda-red);
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.pin-modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.pin-input {
+  padding: 15px;
+  font-size: 1.2rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  letter-spacing: 8px;
+  transition: border-color 0.3s ease;
+}
+
+.pin-input:focus {
+  outline: none;
+  border-color: var(--panda-red);
+}
+
+.pin-error {
+  color: var(--panda-red);
+  margin: 0;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.pin-modal-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.pin-submit-btn,
+.pin-cancel-btn {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pin-submit-btn {
+  background: var(--panda-red);
+  color: white;
+}
+
+.pin-submit-btn:hover {
+  background: var(--panda-red-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(226, 27, 36, 0.3);
+}
+
+.pin-cancel-btn {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.pin-cancel-btn:hover {
+  background: #e0e0e0;
+}

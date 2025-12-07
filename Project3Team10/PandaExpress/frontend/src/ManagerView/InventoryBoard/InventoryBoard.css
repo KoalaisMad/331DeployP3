@@ -1,0 +1,323 @@
+.inventory-page.full-viewport {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100vh; 
+  padding: 20px;
+  background-color: #ffffff;
+  min-height: 100vh;
+  border: 4px solid #0066CC;
+  color: #222;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.inventory-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.inventory-title{
+  font-size: 3rem;
+  color: #000000;
+  margin: 0;
+  font-weight: bold;
+}
+
+.inventory-header-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-close-window,
+.btn-home {
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #8B0000;
+  color: white;
+}
+
+.btn-close-window:hover,
+.btn-home:hover {
+  background-color: #660000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
+}
+
+.translation-pill{
+  background-color: #8B0000;
+  color: #fff;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.translation-pill:hover {
+  background-color: #660000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
+}
+
+.inventory-columns{
+  display:grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr auto; /* Item | Wet/Dry | Supplier | Status | Quantity | Action */
+  gap:0.5rem;
+  font-weight:700;
+  color:#444;
+  padding:0.5rem 0;
+}
+
+.inventory-list{
+  margin-top:0.75rem;
+  display:flex;
+  flex-direction:column;
+  gap:0.5rem;
+  flex: 1 1 auto; 
+  min-height: 0; 
+}
+
+.inventory-list.scrollable { overflow-y: auto; padding-right: 8px }
+
+.inventory-row{
+  display:grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr auto;
+  align-items:center;
+  gap:0.75rem;
+  padding:1rem;
+  border-radius:8px;
+  background: white;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.inventory-row:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.row-left{
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.item-dot{
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff6b6b;
+}
+.item-name{
+  font-weight: 600;
+}
+.status-badge{
+  padding: 0.25rem 0.6rem;
+  border-radius: 12px;
+  font-weight: 600;
+}
+.status-badge.running-low{
+  background: #ffcccb;
+  color: #6b0000;
+}
+.status-badge.low{
+  background: #fff3cd;
+  color: #856404;
+}
+.status-badge.in-stock{
+  background: #d4edda;
+  color: #155724;
+}
+.quantity-box{
+  background: #f0f0f0;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  font-weight: 700;
+}
+.quantity-input{
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  color: #222;
+  padding: 0.35rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 700;
+  text-align: center;
+}
+.name-input{
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  color: #222;
+  padding: 0.35rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 700;
+  width: 100%;
+  max-width: 200px;
+}
+.wetdry-select{
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  color: #222;
+  padding: 0.35rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.supplier-input{
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  color: #222;
+  padding: 0.35rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 700;
+  width: 100%;
+  max-width: 150px;
+}
+.btn-remove{
+  background: #c8102e;
+  color: white;
+  border: none;
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.update-wrapper{
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+}
+.btn-update{
+  background: #17a2b8;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.continued-text{
+  color: #666;
+  margin-top: 0.6rem;
+  font-style: italic;
+}
+
+
+.add-form{
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.add-input{
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+  background: white;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+.add-input:focus {
+  outline: none;
+  border-color: #0066CC;
+}
+.add-select{
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+  background: white;
+  font-size: 1rem;
+}
+.btn-add{
+  background-color: #8B0000;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-add:hover {
+  background-color: #660000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
+}
+
+/* Responsive rules: stack and simplify layout on narrower viewports */
+@media (max-width: 900px) {
+  .inventory-page.full-viewport {
+    padding: 16px 16px 96px 16px;
+  }
+
+  .inventory-columns{
+    font-size:0.95rem;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 80px;
+  }
+
+  .inventory-row{
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 80px;
+    padding:0.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Hide column headers on small screens (they clutter) */
+  .inventory-columns{ display: none; }
+
+  /* Stack each inventory row vertically for narrow screens */
+  .inventory-list{ padding-right: 0 }
+  .inventory-row{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    gap: 0.4rem;
+    align-items: start;
+    padding:0.6rem;
+  }
+
+  .row-left, .row-center, .row-quantity, .row-action{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:0.4rem;
+  }
+
+  .item-name{ font-size:1rem }
+
+  .status-badge{ padding:0.2rem 0.5rem; font-size:0.85rem }
+  .quantity-box, .quantity-input{ padding:0.35rem 0.5rem; min-width:64px; }
+
+  .row-action{ justify-content:flex-end }
+  .btn-remove{ width:100%; padding:0.55rem; border-radius:6px }
+
+  /* Make add form stack and fill width */
+  .add-form{ flex-direction:column; align-items:stretch; gap:0.5rem }
+  .add-input, .add-select, .btn-add{ width:100% }
+
+  /* Move update button into flow so it doesn't overlap content on mobile */
+  .update-wrapper{ position:static; right:auto; bottom:auto; display:flex; justify-content:center; padding-top:0.6rem }
+  .btn-update{ width:100%; max-width:420px }
+
+  /* Improve touch targets */
+  .btn-remove, .btn-add, .btn-update{ font-size:1rem }
+}
+
+@media (max-width: 400px) {
+  .inventory-page.full-viewport { padding: 12px }
+  .item-name{ font-size:0.95rem }
+  .translation-pill{ padding:0.3rem 0.5rem; font-size:0.8rem }
+}

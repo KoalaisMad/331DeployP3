@@ -1,0 +1,52 @@
+thh from 10:42 to 11:10 at HRBB:
+Agenda:
+  - We discussed how sprint 2 went and remaining tasks.
+
+
+Things accomplished:
+  - Split up tasks for sprint 3
+  - Identify bugs
+
+
+Next steps:
+  - Deployment:
+    - Get the app deployed - Jyo
+  - Kitchen Board: - Jyo
+    - Remove cuby - merge from the correct branch 
+    - Make sure the orders match up from casheir view and kiosk
+    - Update an order - change something in the order an delete order
+  - Manager View:
+    - Fix Product usage display chart
+    - make it mobile responsive
+    - Too much to much to scrolling - fix that and make it user friendly
+  - Cashier View:
+      - Fix all the bugs - you can do anything and not edit an order
+      - Fix the drinks
+        - add drink -> issue
+          - not communicating with kitchen board it let's you have an empty bowl 
+        - editing and deletion errors with Bowl, Plate, Bigger Plate categories
+        - the edit buttons don't work
+      - All the button are clumped together - fix that and no scroll feature
+      - Make it mobile responsive
+  - Kiosk View:
+      - Good for now
+  - Inventory board:
+      - Separate between dry/wet
+  - Nav bar
+      - Should link back to the login page
+      - Should have weather (kiosk only), translation, dark mode and back to the login page
+  - Google Auth
+
+Tasks assigned:
+  - Translation - Sriya
+  - Deployment - Jyo
+  - Google Auth - Andrew
+  - Fix all the bugs on Cashier View
+ 
+Internal Deadlines:
+  - Wednesday (11/18)
+ 
+
+Important notes:
+  - Make sure everything is mobile responsive.
+  - Ensure all bugs are fixed by Friday

@@ -1,0 +1,33 @@
+December 4th from 1:00 to 1:20 at ZACH:
+Agenda:
+  - We discussed was accomplished and potential bugs
+
+Things accomplished:
+  - Application is deployed
+  - Translation is 95% done
+  - Google Auth backend is done
+  - Some of Casheir bugs are fixed
+  - Fixed Pagination for Manager view
+
+Next steps:
+  - Work on Accessibility features and UI
+  - Finish Google Autho 
+  - Cashier - redo the UI
+  - Kiosk - fix the appietizers, change the Sound Cloud API 
+  - Overall structure changes
+  - Manager View - Fix Product usage display chart
+  - Nav bar
+  - Kitchen board fixes
+
+Tasks assigned:
+  - Translation and Manager view fixes - Sriya
+  - Kitchen Board, fixing sound cloud API and Fixes in the manager view - Jyo 
+  - Google Auth and Inventory board- Andrew
+  - Fix all the bugs on Cashier View - Ben 
+ 
+Internal Deadlines:
+  - Wednesday (11/18) - Progress on main priorities 
+ 
+
+Important notes:
+  - Ensure all features are done by Friday - merge day

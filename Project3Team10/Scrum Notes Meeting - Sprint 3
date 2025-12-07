@@ -1,0 +1,28 @@
+Novemeber 7thh from 10:45 to 11:10 at HRBB 113:
+Agenda:
+  - We discussed inventory board, deployment, and connections.
+
+
+Things accomplished:
+  - Done with submitting orders and fetching prices from the database
+  - Done with fetching employees and displaying them
+
+
+Next steps:
+  - Continue working on X and Z report
+  - Wokring on updating the database from the frontend
+  - Make the websites mobile responsive
+
+Tasks assigned:
+  - Backend for Manager veiw -> Andrew
+  - Backend for Cashier veiw -> Sriya
+  - Working on deployment - Vercel-> Ben
+  - Burndown charts and inventory board -> Jyo
+ 
+Internal Deadlines:
+  - Done with all the frontend, backend and deployment by monday before class.
+ 
+
+Important notes:
+  - inventory board (the categorizing) will be moved to sprint 2.
+

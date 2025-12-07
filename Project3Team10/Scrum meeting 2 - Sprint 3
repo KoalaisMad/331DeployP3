@@ -1,0 +1,35 @@
+thh from 10:42 to 11:10 at HRBB:
+Agenda:
+  - We discussed was accomplished and potential bugs
+
+Things accomplished:
+  - Some bugs on kitchen board and cashier view fixed.
+  - Working on the translation
+  - Looking into google Autho
+
+
+Next steps:
+  - Concentrate on Prioriteis
+      - Deployment - Jyo
+      - Google Auth - Andrew
+      -
+  - Manager View:
+    - Fix Product usage display chart
+    - make it mobile responsive
+    - Too much to much to scrolling - fix that and make it user friendly
+  - Nav bar
+      - Should like back to the login page
+      - Should have weather (kiosk only), translation, dark mode and back to the login page
+
+Tasks assigned:
+  - Translation - Sriya
+  - Deployment - Jyo 
+  - Google Auth - Andrew
+  - Fix all the bugs on Cashier View - Ben 
+ 
+Internal Deadlines:
+  - Wednesday (11/18) - Progress on main priorities 
+ 
+
+Important notes:
+  - Ensure all features are done by Friday - merge day
