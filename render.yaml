@@ -1,0 +1,33 @@
+services:
+  # Combined Backend + Frontend Service
+  - type: web
+    name: panda-express-app
+    runtime: node
+    region: oregon
+    plan: free
+    rootDirectory: Project3Team10/PandaExpress
+    buildCommand: ./render-build.sh
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PGHOST
+        sync: false
+      - key: PGPORT
+        sync: false
+      - key: PGDATABASE
+        sync: false
+      - key: PGUSER
+        sync: false
+      - key: PGPASSWORD
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: COOKIE_SECRET
+        generateValue: true
+      - key: PORT
+        value: 5000
+      - key: BACKEND_URL
+        sync: false
