@@ -465,7 +465,7 @@ export default function Customer(){
             }
 
             try {
-                const eResp = await fetch(`${API_URL}/api/entrees');
+                const eResp = await fetch(`${API_URL}/api/entrees`);
                 if (eResp.ok){
                     const list = await eResp.json();
                     const items = Array.isArray(list) ? await Promise.all(list.map(resolveFoodItem)) : [];

@@ -40,7 +40,7 @@ function KitchenBoard() {
   const loadOrders = async () => {
     try {
       console.log('Fetching kitchen orders from API...');
-      const response = await fetch(`${API_URL}/api/kitchen/orders');
+      const response = await fetch(`${API_URL}/api/kitchen/orders`);
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
