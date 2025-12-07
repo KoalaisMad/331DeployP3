@@ -5,6 +5,7 @@ import Inventory from './Inventory';
 import ItemsSales from './ItemsSales';
 import Employees from './Employees';
 import InventoryBoard from './InventoryBoard';
+import API_URL from '../config';
 
 export default function Manager() {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ export default function Manager() {
 
   const handleLogOut = async () => {
     try {
-      const response = await fetch('http://localhost:5000/logout', {credentials: 'include'});
+      const response = await fetch(`${API_URL}/logout`, {credentials: 'include'});
       if(response.ok) {
         console.log("Navigating via logout");
         navigate('/');

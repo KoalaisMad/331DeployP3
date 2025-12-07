@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './KitchenBoard.css';
+import API_URL from '../../config';
 
 function KitchenBoard() {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ function KitchenBoard() {
   const initializeDatabase = async () => {
     try {
       console.log('Initializing kitchen board database...');
-      const response = await fetch('/api/kitchen/init-db', {
+      const response = await fetch(`${API_URL}/api/kitchen/init-db', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
       });
@@ -39,7 +40,7 @@ function KitchenBoard() {
   const loadOrders = async () => {
     try {
       console.log('Fetching kitchen orders from API...');
-      const response = await fetch('/api/kitchen/orders');
+      const response = await fetch(`${API_URL}/api/kitchen/orders');
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -69,7 +70,7 @@ function KitchenBoard() {
   const completeOrder = async (orderId) => {
     try {
       console.log('Completing order:', orderId);
-      const response = await fetch('/api/kitchen/complete-order', {
+      const response = await fetch(`${API_URL}/api/kitchen/complete-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ orderId })
@@ -96,7 +97,7 @@ function KitchenBoard() {
 
     try {
       console.log('Canceling order:', orderId);
-      const response = await fetch('/api/kitchen/cancel-order', {
+      const response = await fetch(`${API_URL}/api/kitchen/cancel-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ orderId })
@@ -119,7 +120,7 @@ function KitchenBoard() {
   const remakeOrder = async (orderId) => {
     try {
       console.log('Remaking order:', orderId);
-      const response = await fetch('/api/kitchen/remake-order', {
+      const response = await fetch(`${API_URL}/api/kitchen/remake-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ orderId })
@@ -144,7 +145,7 @@ function KitchenBoard() {
   const markIncomplete = async (orderId) => {
     try {
       console.log('Marking order as incomplete:', orderId);
-      const response = await fetch('/api/kitchen/incomplete-order', {
+      const response = await fetch(`${API_URL}/api/kitchen/incomplete-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ orderId })

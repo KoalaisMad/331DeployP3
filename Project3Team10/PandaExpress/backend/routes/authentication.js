@@ -4,7 +4,8 @@ import pool from "../db.js";
 const router = express.Router();
 import passport from 'passport'
 
-const FRONTEND_ORIGIN = 'http://localhost:3000';
+// In production, frontend is served from same origin, so use relative paths
+const FRONTEND_ORIGIN = process.env.NODE_ENV === 'production' ? '' : (process.env.FRONTEND_URL || 'http://localhost:3000');
 // router.get("/", (req, res) => {
 //     res.send("<a href='/auth/google>Login with Google</a>");
 // });

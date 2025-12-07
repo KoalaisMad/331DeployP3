@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
+import API_URL from '../config';
 
 export default function Inventory() {
 
-  const API_BASE = 'http://localhost:5000/api';
-
   async function apiFetch(path, options = {}) {
-  return fetch(`${API_BASE}${path}`, options);
+  return fetch(`${API_URL}${path}`, options);
 }
 
   // Split price-adjustment into three lists so we can show separate editable tables

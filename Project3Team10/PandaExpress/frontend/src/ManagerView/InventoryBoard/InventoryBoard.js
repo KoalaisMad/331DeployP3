@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./InventoryBoard.css";
+import API_URL from '../../config';
 // Initially empty; real data is fetched from backend /api/inventory
 const INITIAL_ITEMS = [];
 
 export default function InventoryBoard({ onBackToInventory }) {
 	const navigate = useNavigate();
-	const API_BASE = 'http://localhost:5000/api';
 
 	async function apiFetch(path, options = {}) {
-		return fetch(`${API_BASE}${path}`, options);
+		return fetch(`${API_URL}${path}`, options);
 	}
 
 	const [items, setItems] = useState(INITIAL_ITEMS.map(i => ({ ...i })));
@@ -31,7 +31,7 @@ export default function InventoryBoard({ onBackToInventory }) {
 		let mounted = true;
 		const fetchInventory = async () => {
 			try {
-				const resp = await fetch('/api/inventory');
+				const resp = await apiFetch('/api/inventory');
 				if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
 				const data = await resp.json();
 			if (!mounted) return;

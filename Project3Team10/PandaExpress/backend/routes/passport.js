@@ -7,10 +7,14 @@ import passport from 'passport';
 import {Strategy as GoogleStrategy} from 'passport-google-oauth2';
 
 
+// Determine callback URL based on environment
+// In production on Render, use the web service URL
+const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:5000';
+
 passport.use(new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "http://localhost:5000/auth/google/callback",
+        callbackURL: `${BACKEND_URL}/auth/google/callback`,
         passReqToCallback   : true
 },
 async function(request, accessToken, refreshToken, profile, done) {

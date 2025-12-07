@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Cashier.css';
-
-const API_BASE = 'http://localhost:5000/api';
+import API_URL from '../config';
 
 // Compatibility wrapper: many frontend calls use top-level paths
 // (e.g. `/sizes/prices`) but inventory endpoints were moved under
@@ -27,7 +26,7 @@ async function apiFetch(path, options = {}) {
   const shouldPrefixInventory = inventoryPrefixes.some(p => normalized === p || normalized.startsWith(`${p}/`));
   const effectivePath = shouldPrefixInventory ? `/inventory${normalized}` : normalized;
 
-  return fetch(`${API_BASE}${effectivePath}`, options);
+  return fetch(`${API_URL}/api${effectivePath}`, options);
 }
 
 export default function Cashier() {

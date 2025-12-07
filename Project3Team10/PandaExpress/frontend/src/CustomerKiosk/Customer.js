@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './Customer.css';
 import SoundCloudPlayer from './SoundCloudPlayer.js';
 import SizeSelectionPage from './SizeSelectionPage';
+import API_URL from '../config';
   
 export default function Customer(){
     const navigate = useNavigate();
@@ -169,7 +170,7 @@ export default function Customer(){
 
             // Fetch all sizes in one request and map names -> price + size details
             try {
-                const resp = await fetch('/api/sizes');
+                const resp = await fetch(`${API_URL}/api/sizes`);
                 if (resp.ok){
                     const list = await resp.json(); // [{id, name, price, numberofentrees, numberofsides}, ...]
                     if (Array.isArray(list)){
@@ -194,7 +195,7 @@ export default function Customer(){
 
             // For appetizers/drinks, fetch list of enabled items and use a 'from' price (minimum)
             try {
-                const resp = await fetch('/api/appetizers-drinks/prices');
+                const resp = await fetch(`${API_URL}/api/appetizers-drinks/prices`);
                 if (resp.ok){
                     const list = await resp.json(); // [{name, price}, ...]
                     if (Array.isArray(list) && list.length > 0){
@@ -397,7 +398,7 @@ export default function Customer(){
             // no id provided — attempt to get/create the food via the backend to obtain an id
             if (name) {
                 try {
-                    const resp = await fetch('/api/food', {
+                    const resp = await fetch(`${API_URL}/api/food', {
                         method: 'POST', headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ name })
                     });
@@ -418,7 +419,7 @@ export default function Customer(){
         if (typeof i === 'string'){
             const name = i;
             try {
-                const resp = await fetch('/api/food', {
+                const resp = await fetch(`${API_URL}/api/food', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name })
@@ -453,7 +454,7 @@ export default function Customer(){
         // Fetch sides and entrees lists and resolve images
         (async () => {
             try {
-                const s = await fetch('/api/sides');
+                const s = await fetch(`${API_URL}/api/sides');
                 if (s.ok){
                     const list = await s.json();
                     const items = Array.isArray(list) ? await Promise.all(list.map(resolveFoodItem)) : [];
@@ -464,7 +465,7 @@ export default function Customer(){
             }
 
             try {
-                const eResp = await fetch('/api/entrees');
+                const eResp = await fetch(`${API_URL}/api/entrees');
                 if (eResp.ok){
                     const list = await eResp.json();
                     const items = Array.isArray(list) ? await Promise.all(list.map(resolveFoodItem)) : [];
@@ -482,7 +483,7 @@ export default function Customer(){
         setAppetizerPageOpen(true);
         try {
             // Fetch appetizers (id, name, price) and render images via direct image route
-            const resp = await fetch('/api/inventory/price-adjustment/appetizers-drinks-enabled');
+            const resp = await fetch(`${API_URL}/api/inventory/price-adjustment/appetizers-drinks-enabled');
             if (resp.ok){
                 const list = await resp.json(); // [{id, name, price}, ...]
                 const items = Array.isArray(list) ? list.map(i => {
@@ -517,7 +518,7 @@ export default function Customer(){
         // Build a fixed set of drink sizes (Small/Medium/Large) and try to resolve their prices
         (async () => {
             try {
-                const resp = await fetch('/api/appetizers-drinks/prices');
+                const resp = await fetch(`${API_URL}/api/appetizers-drinks/prices');
                 let list = [];
                 if (resp.ok) list = await resp.json(); // [{name, price}, ...]
 
@@ -608,7 +609,7 @@ export default function Customer(){
             }
 
             try {
-                const resp = await fetch(`/api/appetizers-drinks/price/${encodeURIComponent(selectedAppetizer)}`);
+                const resp = await fetch(`${API_URL}/api/appetizers-drinks/price/${encodeURIComponent(selectedAppetizer)}`);
                 if (resp.ok){
                     const data = await resp.json();
                     const raw = data && data.price;
@@ -637,7 +638,7 @@ export default function Customer(){
                 setOrderItems(prev => [...prev, { name: dbName, price: selected.price }]);
             } else {
                 try {
-                    const resp = await fetch(`/api/appetizers-drinks/price/${encodeURIComponent(dbName)}`);
+                    const resp = await fetch(`${API_URL}/api/appetizers-drinks/price/${encodeURIComponent(dbName)}`);
                     if (resp.ok){
                         const data = await resp.json();
                         const raw = data && data.price;
@@ -714,7 +715,7 @@ export default function Customer(){
         }
 
         try {
-            const resp = await fetch(`/api/appetizers-drinks/price/${encodeURIComponent(appetizerPageSelected)}`);
+            const resp = await fetch(`${API_URL}/api/appetizers-drinks/price/${encodeURIComponent(appetizerPageSelected)}`);
             if (resp.ok){
                 const data = await resp.json();
                 const raw = data && data.price;
@@ -943,7 +944,7 @@ export default function Customer(){
             const payload = { combos, appetizers, drinks, totalPrice: Number(total || 0) };
 
             try {
-                const resp = await fetch('/api/orders', {
+                const resp = await fetch(`${API_URL}/api/orders`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)

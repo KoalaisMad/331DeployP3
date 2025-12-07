@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LandingPage.css';
+import API_URL from '../config';
 
 function LandingPage() {
   const navigate = useNavigate();
@@ -67,7 +68,7 @@ function LandingPage() {
             <p>Self-service kiosk for placing orders</p>
           </div>
 
-          <div className="role-card cashier-card" onClick={() => handleRedirect('http://localhost:5000/auth/google/start?view=cashier')}>
+          <div className="role-card cashier-card" onClick={() => handleRedirect(`${API_URL}/auth/google/start?view=cashier`)}>
             <div className="role-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
@@ -79,7 +80,7 @@ function LandingPage() {
 
           {/* <div className="role-card manager-card" onClick={() => handleNavigation('/manager')}> */}
           {/* TODO: change backend url */}
-          <div className="role-card manager-card" onClick={() => handleRedirect('http://localhost:5000/auth/google/start?view=manager')}>
+          <div className="role-card manager-card" onClick={() => handleRedirect(`${API_URL}/auth/google/start?view=manager`)}>
             <div className="role-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>

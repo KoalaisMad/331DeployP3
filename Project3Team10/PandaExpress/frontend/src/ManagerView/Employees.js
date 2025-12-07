@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Manager.css';
+import API_URL from '../config';
 
 const ALLOWED_ROLES = ['None','Employee', 'Manager'];
 
@@ -27,11 +28,9 @@ export default function Employees() {
   useEffect(() => {
     loadEmployees();
   }, []);
-
-  const API_BASE = 'http://localhost:5000/api';
   
   async function apiFetch(path, options = {}) {
-    return fetch(`${API_BASE}${path}`, options);
+    return fetch(`${API_URL}${path}`, options);
   }
 
   async function getEmployees() {

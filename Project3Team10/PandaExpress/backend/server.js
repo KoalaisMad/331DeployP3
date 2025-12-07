@@ -29,16 +29,33 @@ import session from 'express-session';
 
 
 // app.use(cors());
+// Since frontend and backend are on same origin, allow same-origin requests
 const allowedOrigins = process.env.NODE_ENV === 'production' 
-  ? [process.env.FRONTEND_URL || 'https://your-app-name.onrender.com']
+  ? [process.env.FRONTEND_URL]
   : ['http://localhost:3000'];
 
 app.use(cors({
-  origin: allowedOrigins,
+  origin: function(origin, callback) {
+    // Allow requests with no origin (same-origin requests)
+    if (!origin) return callback(null, true);
+    
+    // In production, allow same origin since frontend and backend are served together
+    if (process.env.NODE_ENV === 'production') {
+      return callback(null, true);
+    }
+    
+    if (allowedOrigins.indexOf(origin) !== -1 || !process.env.NODE_ENV) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
 }));
 
 app.use(express.json());
+
+// Serve static files from React app
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 
 app.use(session({
@@ -81,13 +98,38 @@ app.use("/api", imagesRouter);
 
 app.use("/", authenticationRouter);
 
-// Serve static files from React app in production
-if (process.env.NODE_ENV === 'production') {
-  // Serve any file from the React build directory
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
-  });
-}
+// Health check endpoint (must be before catch-all route)
+app.get('/health', async (req, res) => {
+  try {
+    // Check database connection
+    const dbResult = await pool.query('SELECT NOW()');
+    
+    res.status(200).json({
+      status: 'healthy',
+      timestamp: new Date().toISOString(),
+      environment: process.env.NODE_ENV || 'development',
+      database: {
+        connected: true,
+        timestamp: dbResult.rows[0].now
+      }
+    });
+  } catch (error) {
+    res.status(503).json({
+      status: 'unhealthy',
+      timestamp: new Date().toISOString(),
+      error: error.message,
+      database: {
+        connected: false
+      }
+    });
+  }
+});
+
+// Catch-all handler: serve React app for any route not handled by API
+// MUST be LAST route
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+});
 
 // quick DB check
 pool.query("SELECT NOW()", (err, result) => {
