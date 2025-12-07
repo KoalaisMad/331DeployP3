@@ -5,6 +5,7 @@ services:
     runtime: node
     region: oregon
     plan: free
+    rootDirectory: Project3Team10/PandaExpress
     buildCommand: ./render-build.sh
     startCommand: cd backend && npm start
     envVars:
