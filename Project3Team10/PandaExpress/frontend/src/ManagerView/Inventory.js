@@ -166,7 +166,7 @@ export default function Inventory() {
     for (const item of items) {
       if (!item || typeof item.id === 'undefined') continue;
       try {
-        const res = await fetch(`${API_BASE}/food-image/${item.id}`);
+        const res = await fetch(`${API_URL}/food-image/${item.id}`);
         if (!res.ok) continue; // no image available or route not present
         const contentType = res.headers.get('content-type') || '';
         if (!contentType.startsWith('image/')) continue;
@@ -247,7 +247,7 @@ export default function Inventory() {
     for (const item of items) {
       if (!item || typeof item.id === 'undefined') continue;
       try {
-        const res = await fetch(`${API_BASE}/appetizer-drink-image/${item.id}`);
+        const res = await fetch(`${API_URL}/appetizer-drink-image/${item.id}`);
         if (!res.ok) continue; // no image available or route not present
         const contentType = res.headers.get('content-type') || '';
         if (!contentType.startsWith('image/')) continue;
@@ -323,7 +323,7 @@ export default function Inventory() {
       form.append('image', file);
       form.append('appetizer_drink_id', String(appId));
 
-      const res = await fetch(`${API_BASE}/upload-appetizer-drink-image`, {
+      const res = await fetch(`${API_URL}/upload-appetizer-drink-image`, {
         method: 'POST',
         body: form
       });
@@ -434,7 +434,7 @@ export default function Inventory() {
       form.append('image', file);
       form.append('food_id', String(foodId));
 
-      const res = await fetch(`${API_BASE}/upload-image`, {
+      const res = await fetch(`${API_URL}/upload-image`, {
         method: 'POST',
         body: form
       });
@@ -744,7 +744,7 @@ const bulkAddInventory = async () => {
 
           // Link inventory and food on server
           try {
-            const linkRes = await fetch(`${API_BASE}/link/inventory-food`, {
+            const linkRes = await fetch(`${API_URL}/link/inventory-food`, {
               method: 'POST', headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ itemName: serverMainName, inventoryName: trimmedItem, servingSize: 1 })
             });
@@ -761,7 +761,7 @@ const bulkAddInventory = async () => {
       // Link sizes to the main item via backend
       for (const size of sizes) {
         try {
-          const linkSizeRes = await fetch(`${API_BASE}/link/size-food`, {
+          const linkSizeRes = await fetch(`${API_URL}/link/size-food`, {
             method: 'POST', headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ sizeName: size.name, itemName: serverMainName })
           });
@@ -823,7 +823,7 @@ const bulkAddInventory = async () => {
 
 const createOrGetFood = async (name, price = 0.0, isPremium = false) => {
     try {
-      const res = await fetch(`${API_BASE}/food`, {
+      const res = await fetch(`${API_URL}/food`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, price, isPremium })
       });
@@ -834,7 +834,7 @@ const createOrGetFood = async (name, price = 0.0, isPremium = false) => {
         // If the endpoint is not found (server not restarted or route missing),
         // fallback to local-only behavior so the UI can continue working.
         if (res.status === 404) {
-          console.warn(`POST ${API_BASE}/food returned 404 — falling back to local-only create for '${name}'`);
+          console.warn(`POST ${API_URL}/food returned 404 — falling back to local-only create for '${name}'`);
           return { existed: false, item: { id: null, name, price, premium: isPremium }, fallback: true };
         }
         // return text for diagnostics
@@ -854,7 +854,7 @@ const createOrGetFood = async (name, price = 0.0, isPremium = false) => {
   // Helper: create or return existing inventory item on backend
   const createOrGetInventory = async (name, quantity = 100) => {
     try {
-      const res = await fetch(`${API_BASE}/inventory`, {
+      const res = await fetch(`${API_URL}/inventory`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, quantity })
       });
@@ -862,7 +862,7 @@ const createOrGetFood = async (name, price = 0.0, isPremium = false) => {
       const text = await res.text();
       if (!res.ok) {
         if (res.status === 404) {
-          console.warn(`POST ${API_BASE}/inventory returned 404 — falling back to local-only create for '${name}'`);
+          console.warn(`POST ${API_URL}/inventory returned 404 — falling back to local-only create for '${name}'`);
           return { existed: false, item: { id: null, name, quantity }, fallback: true };
         }
         throw new Error(`Server error (${res.status}): ${text}`);

@@ -398,7 +398,7 @@ export default function Customer(){
             // no id provided — attempt to get/create the food via the backend to obtain an id
             if (name) {
                 try {
-                    const resp = await fetch(`${API_URL}/api/food', {
+                    const resp = await fetch(`${API_URL}/api/food`, {
                         method: 'POST', headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ name })
                     });
