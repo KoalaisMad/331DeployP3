@@ -126,8 +126,8 @@ app.get('/health', async (req, res) => {
 });
 
 // Catch-all handler: serve React app for any route not handled by API
-// MUST be LAST route
-app.use((req, res) => {
+// MUST be LAST route - handles client-side routing
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
 });
 
