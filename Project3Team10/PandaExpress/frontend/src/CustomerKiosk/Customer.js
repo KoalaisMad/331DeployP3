@@ -454,7 +454,7 @@ export default function Customer(){
         // Fetch sides and entrees lists and resolve images
         (async () => {
             try {
-                const s = await fetch(`${API_URL}/api/sides');
+                const s = await fetch(`${API_URL}/api/sides`);
                 if (s.ok){
                     const list = await s.json();
                     const items = Array.isArray(list) ? await Promise.all(list.map(resolveFoodItem)) : [];
@@ -483,7 +483,7 @@ export default function Customer(){
         setAppetizerPageOpen(true);
         try {
             // Fetch appetizers (id, name, price) and render images via direct image route
-            const resp = await fetch(`${API_URL}/api/inventory/price-adjustment/appetizers-drinks-enabled');
+            const resp = await fetch(`${API_URL}/api/inventory/price-adjustment/appetizers-drinks-enabled`);
             if (resp.ok){
                 const list = await resp.json(); // [{id, name, price}, ...]
                 const items = Array.isArray(list) ? list.map(i => {
@@ -518,7 +518,7 @@ export default function Customer(){
         // Build a fixed set of drink sizes (Small/Medium/Large) and try to resolve their prices
         (async () => {
             try {
-                const resp = await fetch(`${API_URL}/api/appetizers-drinks/prices');
+                const resp = await fetch(`${API_URL}/api/appetizers-drinks/prices`);
                 let list = [];
                 if (resp.ok) list = await resp.json(); // [{name, price}, ...]
 
