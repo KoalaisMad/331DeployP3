@@ -419,7 +419,7 @@ export default function Customer(){
         if (typeof i === 'string'){
             const name = i;
             try {
-                const resp = await fetch(`${API_URL}/api/food', {
+                const resp = await fetch(`${API_URL}/api/food`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name })
