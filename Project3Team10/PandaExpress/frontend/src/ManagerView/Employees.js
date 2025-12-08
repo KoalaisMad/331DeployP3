@@ -4,6 +4,11 @@ import API_URL from '../config';
 
 const ALLOWED_ROLES = ['None','Employee', 'Manager'];
 
+/**
+ * Employees management component.
+ * @function
+ * @returns {JSX.Element} The employees component.
+ */
 export default function Employees() {
   const [employees, setEmployees] = useState([]);
   const [editingCell, setEditingCell] = useState({ id: null, field: null });
@@ -28,9 +33,11 @@ export default function Employees() {
   useEffect(() => {
     loadEmployees();
   }, []);
+
+  const API_BASE = `${API_URL}/api`;
   
   async function apiFetch(path, options = {}) {
-    return fetch(`${API_URL}${path}`, options);
+    return fetch(`${API_BASE}${path}`, options);
   }
 
   async function getEmployees() {
