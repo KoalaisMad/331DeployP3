@@ -46,7 +46,15 @@ router.get("/auth/google/start", (req, res, next) => {
 
     console.log("View", view);
 
-    passport.authenticate("google", {scope: ["profile", "email"], prompt: 'select_account', state: validView})(req, res, next);
+    // Store intended view in session so it can be retrieved in callback
+    req.session.intendedView = validView;
+    req.session.save((err) => {
+        if (err) {
+            console.error('Session save error during start:', err);
+            return res.redirect(`${FRONTEND_ORIGIN}/unauthorized`);
+        }
+        passport.authenticate("google", {scope: ["profile", "email"], prompt: 'select_account'})(req, res, next);
+    });
 });
 
 router.get("/auth/google", 
@@ -58,8 +66,8 @@ router.get("/auth/google/callback", passport.authenticate('google', {failureRedi
     // res.redirect('http://localhost:3000/profile');
     let redirectUrl = `${FRONTEND_ORIGIN}/unauthorized`;
 
-    // Obtain view from session
-    const intendedView = req.query.state;
+    // Obtain view from session (not from query string)
+    const intendedView = req.session.intendedView;
     const userRole = req.user && req.user.role ? req.user.role.toLowerCase().trim() : '';
     
     console.log('=== OAuth Callback Debug ===');

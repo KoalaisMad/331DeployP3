@@ -3,10 +3,13 @@ import pool from "../db.js";
 
 const router = express.Router();
 
-// Create-or-get a food item by name. This endpoint is used by frontend
-// helpers that have a food name but need the DB id for image URLs.
-// Mounted at `/api` (server.js mounts inventory router at `/api`), so
-// callers can POST to `/api/food`.
+/**
+ * Route to create or get a food item by name.
+ * @name POST /api/food
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.post('/food', async (req, res) => {
   try {
     const { name } = req.body || {};
@@ -37,6 +40,13 @@ router.post('/food', async (req, res) => {
   }
 });
 
+/**
+ * Route to get all enabled sides.
+ * @name GET /api/sides
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.get("/sides", async (req, res) => {
   try {
     const result = await pool.query("SELECT name FROM food WHERE is_side = TRUE and enabled = TRUE");
@@ -47,6 +57,13 @@ router.get("/sides", async (req, res) => {
   }
 });
 
+/**
+ * Route to get all enabled entrees.
+ * @name GET /api/entrees
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.get("/entrees", async (req, res) => {
   try {
     const result = await pool.query("SELECT DISTINCT f.name FROM food f JOIN sizes_to_food stf ON f.id = stf.foodid JOIN food_to_inventory fti ON f.id = fti.foodid WHERE f.is_side = FALSE AND f.enabled = TRUE");
@@ -57,8 +74,13 @@ router.get("/entrees", async (req, res) => {
   }
 });
 
-// Add size item
-// Mounted at /api/inventory -> POST /api/inventory/price-adjustment/sizes
+/**
+ * Route to add a new size item.
+ * @name POST /api/inventory/price-adjustment/sizes
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.post("/price-adjustment/sizes", async (req, res) => {
   try {
     const item = req.body;
@@ -75,7 +97,13 @@ router.post("/price-adjustment/sizes", async (req, res) => {
   }
 });
 
-// Add appetizer/drink
+/**
+ * Route to add a new appetizer or drink.
+ * @name POST /api/inventory/price-adjustment/appetizers-drinks
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.post("/price-adjustment/appetizers-drinks", async (req, res) => {
   try {
     const item = req.body;
@@ -92,7 +120,13 @@ router.post("/price-adjustment/appetizers-drinks", async (req, res) => {
   }
 });
 
-// Add main item
+/**
+ * Route to add a new main item.
+ * @name POST /api/inventory/price-adjustment/main-items
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.post("/price-adjustment/main-items", async (req, res) => {
   try {
     const item = req.body;
@@ -109,7 +143,13 @@ router.post("/price-adjustment/main-items", async (req, res) => {
   }
 });
 
-// Update sizes table
+/**
+ * Route to update a size item.
+ * @name PUT /api/price-adjustment/sizes
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.put("/price-adjustment/sizes", async (req, res) => {
   try {
     // Information needed: employee, property, newValue
@@ -138,7 +178,13 @@ router.put("/price-adjustment/sizes", async (req, res) => {
   }
 });
 
-// Update appetizers-drinks table
+/**
+ * Route to update an appetizer or drink.
+ * @name PUT /api/price-adjustment/appetizers-drinks
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.put("/price-adjustment/appetizers-drinks", async (req, res) => {
   try {
     // Information needed: employee, property, newValue
@@ -164,7 +210,13 @@ router.put("/price-adjustment/appetizers-drinks", async (req, res) => {
   }
 });
 
-// Update main-items table
+/**
+ * Route to update a main item.
+ * @name PUT /api/price-adjustment/main-items
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.put("/price-adjustment/main-items", async (req, res) => {
   try {
     // Information needed: employee, property, newValue
@@ -190,8 +242,14 @@ router.put("/price-adjustment/main-items", async (req, res) => {
   }
 });
 
-// Delete size
-  router.delete("/price-adjustment/sizes", async(req, res) => {
+/**
+ * Route to delete a size.
+ * @name DELETE /api/price-adjustment/sizes
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
+router.delete("/price-adjustment/sizes", async(req, res) => {
     try {
       // Information that is needed: employee id
       const item = req.body; 
@@ -210,8 +268,14 @@ router.put("/price-adjustment/main-items", async (req, res) => {
     }
   });
 
-  // Delete appetizer/drink
-  router.delete("/price-adjustment/appetizers-drinks", async(req, res) => {
+/**
+ * Route to delete an appetizer or drink.
+ * @name DELETE /api/price-adjustment/appetizers-drinks
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
+router.delete("/price-adjustment/appetizers-drinks", async(req, res) => {
     try {
       // Information that is needed: employee id
       const item = req.body; 
@@ -230,8 +294,14 @@ router.put("/price-adjustment/main-items", async (req, res) => {
     }
   });
 
-  // Delete main item
-  router.delete("/price-adjustment/main-items", async(req, res) => {
+/**
+ * Route to delete a main item.
+ * @name DELETE /api/price-adjustment/main-items
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
+router.delete("/price-adjustment/main-items", async(req, res) => {
     try {
       // Information that is needed: employee id
       const item = req.body; 
@@ -260,7 +330,13 @@ router.put("/price-adjustment/main-items", async (req, res) => {
     }
   });
 
-// Get data from sizes table
+/**
+ * Route to get all sizes.
+ * @name GET /api/price-adjustment/sizes
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.get("/price-adjustment/sizes", async (req, res) => {
   try {
     const result = await pool.query("SELECT id, numberofentrees, numberofsides, name, price FROM sizes");
@@ -273,7 +349,13 @@ router.get("/price-adjustment/sizes", async (req, res) => {
 
 });
 
-// Get data from appetizers-drinks
+/**
+ * Route to get all appetizers and drinks.
+ * @name GET /api/price-adjustment/appetizers-drinks
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.get("/price-adjustment/appetizers-drinks", async (req, res) => {
   try {
     // Return only enabled appetizers/drinks for consumer-facing requests
@@ -286,6 +368,13 @@ router.get("/price-adjustment/appetizers-drinks", async (req, res) => {
   }
 });
 
+/**
+ * Route to get all enabled appetizers and drinks.
+ * @name GET /api/price-adjustment/appetizers-drinks-enabled
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.get("/price-adjustment/appetizers-drinks-enabled", async (req, res) => {
   try {
     // Return only enabled appetizers/drinks for consumer-facing requests
@@ -298,8 +387,13 @@ router.get("/price-adjustment/appetizers-drinks-enabled", async (req, res) => {
   }
 });
 
-
-// Get data from main items table
+/**
+ * Route to get all main items.
+ * @name GET /api/price-adjustment/main-items
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.get("/price-adjustment/main-items", async (req, res) => {
   try {
     const result = await pool.query("SELECT id, name, premium, enabled, is_side FROM food");
@@ -312,6 +406,13 @@ router.get("/price-adjustment/main-items", async (req, res) => {
 
 });
 
+/**
+ * Route to get all enabled appetizers.
+ * @name GET /api/appetizers
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.get("/appetizers", async (req, res) => {
   try {
     const result = await pool.query("SELECT name FROM appetizers_and_drinks WHERE enabled = TRUE");
@@ -321,6 +422,14 @@ router.get("/appetizers", async (req, res) => {
     res.status(500).json({ error: "Database query failed" });
   } 
 });
+
+/**
+ * Route to get all sizes.
+ * @name GET /api/sizes
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.get("/sizes", async (req, res) => {
   try {
     const result = await pool.query(
@@ -332,6 +441,13 @@ router.get("/sizes", async (req, res) => {
   }
 });
 
+/**
+ * Route to get all enabled entrees with details.
+ * @name GET /api/entrees
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.get("/entrees", async (req, res) => {
   try {
     const result = await pool.query(`
@@ -345,6 +461,13 @@ router.get("/entrees", async (req, res) => {
   }
 });
 
+/**
+ * Route to get all enabled appetizers with details.
+ * @name GET /api/appetizers
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.get("/appetizers", async (req, res) => {
   try {
     const result = await pool.query(`
@@ -358,7 +481,13 @@ router.get("/appetizers", async (req, res) => {
   }
 });
 
-// 1. Get all premium entree names
+/**
+ * Route to get all premium entree names.
+ * @name GET /api/premium-entrees
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.get("/premium-entrees", async (req, res) => {
   try {
     const result = await pool.query(
@@ -371,7 +500,13 @@ router.get("/premium-entrees", async (req, res) => {
   }
 });
 
-// 2. Get all side names
+/**
+ * Route to get all side names.
+ * @name GET /api/sides/names
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.get("/sides/names", async (req, res) => {
   try {
     const result = await pool.query(
@@ -384,7 +519,13 @@ router.get("/sides/names", async (req, res) => {
   }
 });
 
-// Compatibility: return only entree names for callers that expect names list
+/**
+ * Route to get all entree names.
+ * @name GET /api/entrees/names
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.get("/entrees/names", async (req, res) => {
   try {
     const result = await pool.query(
@@ -397,7 +538,13 @@ router.get("/entrees/names", async (req, res) => {
   }
 });
 
-// 3. Get all size names + prices (Large, Medium, Bowl, etc.)
+/**
+ * Route to get all size names and prices.
+ * @name GET /api/sizes/prices
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.get("/sizes/prices", async (req, res) => {
   try {
     const result = await pool.query(
@@ -410,7 +557,13 @@ router.get("/sizes/prices", async (req, res) => {
   }
 });
 
-// 4. Get a single size price by name
+/**
+ * Route to get a single size price by name.
+ * @name GET /api/sizes/price/:name
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.get("/sizes/price/:name", async (req, res) => {
   try {
     const result = await pool.query(
@@ -429,7 +582,13 @@ router.get("/sizes/price/:name", async (req, res) => {
   }
 });
 
-// 5. Get prices for appetizers & drinks
+/**
+ * Route to get prices for all appetizers and drinks.
+ * @name GET /api/appetizers-drinks/prices
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.get("/appetizers-drinks/prices", async (req, res) => {
   try {
     const result = await pool.query(
@@ -442,7 +601,13 @@ router.get("/appetizers-drinks/prices", async (req, res) => {
   }
 });
 
-// 6. Get price for a single appetizer/drink by name
+/**
+ * Route to get price for a single appetizer or drink by name.
+ * @name GET /api/appetizers-drinks/price/:name
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.get("/appetizers-drinks/price/:name", async (req, res) => {
   try {
     const result = await pool.query(
@@ -461,9 +626,13 @@ router.get("/appetizers-drinks/price/:name", async (req, res) => {
   }
 });
 
-
-// Create or return existing inventory item
-// Mounted at /api/inventory -> POST /api/inventory
+/**
+ * Route to create or return existing inventory item.
+ * @name POST /api/inventory
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.post('/', async (req, res) => {
   const { name, quantity = 100 } = req.body || {};
   if (!name || !name.trim()) return res.status(400).json({ error: 'name is required' });
@@ -488,7 +657,13 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Get all inventory items and derive a status from quantity
+/**
+ * Route to get all inventory items with status.
+ * @name GET /api/inventory
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.get('/', async (req, res) => {
   try {
     const result = await pool.query('SELECT id, name, quantity, wet, supplier FROM inventory ORDER BY id');
@@ -516,7 +691,13 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Add an inventory item to inventory board database and assign a status to item
+/**
+ * Route to add an inventory item to inventory board.
+ * @name POST /api/inventory/inventory-board
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.post('/inventory-board', async (req, res) => {
   try {
     const { name, quantity, wet } = req.body;
@@ -546,6 +727,13 @@ router.post('/inventory-board', async (req, res) => {
   }
 });
 
+/**
+ * Route to update an inventory item in inventory board.
+ * @name PUT /api/inventory/inventory-board
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.put('/inventory-board', async (req, res) => {
   try {
     const { id, name, quantity, wet, supplier } = req.body;
@@ -576,8 +764,13 @@ router.put('/inventory-board', async (req, res) => {
   }
 });
 
-
-
+/**
+ * Route to delete an inventory item from inventory board.
+ * @name DELETE /api/inventory/inventory-board
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.delete('/inventory-board', async (req, res) => {
   try {
     const obj = req.body;

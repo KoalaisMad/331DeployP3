@@ -11,6 +11,13 @@ import multer from 'multer';
 const storage  = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
+/**
+ * Route to upload an image for a food item.
+ * @name POST /upload-image
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.post('/upload-image', upload.single('image'), async (req, res) => {
   try {
     if (!req.file) {
@@ -40,6 +47,13 @@ router.post('/upload-image', upload.single('image'), async (req, res) => {
   }
 });
 
+/**
+ * Route to upload an image for an appetizer or drink.
+ * @name POST /upload-appetizer-drink-image
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.post('/upload-appetizer-drink-image', upload.single('image'), async (req, res) => {
   try {
     if (!req.file) {
@@ -64,7 +78,13 @@ router.post('/upload-appetizer-drink-image', upload.single('image'), async (req,
   }
 });
 
-// Serve a food image by food id or image id
+/**
+ * Route to serve a food image by food ID.
+ * @name GET /food-image/:id
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.get('/food-image/:id', async (req, res) => {
   try {
     const id = parseInt(req.params.id, 10);
@@ -94,7 +114,13 @@ router.get('/food-image/:id', async (req, res) => {
 });
 
 
-//Serve an appetizer/drink image by its id
+/**
+ * Route to serve an appetizer/drink image by its ID.
+ * @name GET /appetizer-drink-image/:id
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.get('/appetizer-drink-image/:id', async (req, res) => {
   try {
     const id = parseInt(req.params.id, 10);

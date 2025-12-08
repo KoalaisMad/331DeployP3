@@ -405,7 +405,7 @@ export default function Customer(){
                     if (resp.ok){
                         const data = await resp.json().catch(() => null);
                         const id = data && data.item && (data.item.id || data.item.id === 0) ? data.item.id : undefined;
-                        const imgUrl = id !== undefined ? `/api/food-image/${id}` : undefined;
+                        const imgUrl = id !== undefined ? `${API_URL}/api/food-image/${id}` : undefined;
                         return { name, id, imgUrl };
                     }
                 } catch (e) {
@@ -427,7 +427,7 @@ export default function Customer(){
                     if (resp.ok){
                     const data = await resp.json().catch(() => null);
                     const id = data && data.item && (data.item.id || data.item.id === 0) ? data.item.id : undefined;
-                    const imgUrl = id !== undefined ? `/api/food-image/${id}` : undefined;
+                    const imgUrl = id !== undefined ? `${API_URL}/api/food-image/${id}` : undefined;
                     return { name, id, imgUrl };
                 }
             } catch (e) {
@@ -491,7 +491,7 @@ export default function Customer(){
                     const name = i && i.name;
                     const raw = i && i.price;
                     const p = raw != null ? Number(raw) : undefined;
-                    const imgUrl = id !== undefined ? `/api/appetizer-drink-image/${id}` : undefined;
+                    const imgUrl = id !== undefined ? `${API_URL}/api/appetizer-drink-image/${id}` : undefined;
                     return { name, id, imgUrl, price: (!Number.isNaN(p) ? p : undefined) };
                 }) : [];
                 const cleaned = (items || []).filter(Boolean);

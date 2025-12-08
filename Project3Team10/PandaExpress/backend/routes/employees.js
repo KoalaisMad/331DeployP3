@@ -7,8 +7,13 @@ const router = express.Router();
 
 
 
-// Example route that queries data
-// Mounted at /api/employees -> GET /api/employees
+/**
+ * Route to get all employees ordered by ID.
+ * @name GET /api/employees
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.get("/", async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM employees ORDER by id");
@@ -19,8 +24,13 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Update an employee's name or role
-// Update an employee's name or role -> PUT /api/employees
+/**
+ * Route to update an employee's name, role, or email.
+ * @name PUT /api/employees
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.put("/", async (req, res) => {
   try {
     const { employee, property, newValue } = req.body;
@@ -53,8 +63,13 @@ router.put("/", async (req, res) => {
   }
   });
 
-// Delete employee
-// DELETE /api/employees
+/**
+ * Route to delete an employee by ID.
+ * @name DELETE /api/employees
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.delete("/", async(req, res) => {
 try {
     const employee = req.body; 
@@ -71,8 +86,13 @@ try {
 }
 });
 
-// Adding employee
-// POST /api/employees
+/**
+ * Route to add a new employee.
+ * @name POST /api/employees
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.post("/", async(req, res) => {
 try {
     const employee = req.body;
@@ -88,8 +108,13 @@ try {
 }
 });
 
-// Update employee details (email, phone, address, age, role)
-// PUT /api/employees/details
+/**
+ * Route to update employee details (email, phone, address, age, role).
+ * @name PUT /api/employees/details
+ * @function
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 router.put("/details", async (req, res) => {
   try {
     const { id, email, phone, address, age, role } = req.body;
