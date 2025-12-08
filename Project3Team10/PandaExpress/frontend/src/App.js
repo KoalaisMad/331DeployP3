@@ -27,9 +27,9 @@ function App() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/customer" element={<Customer />} />
       {/* Protect cashier view from unauthorized access */}
-      <Route path="/cashier" element={<ProtectedRoute allowedRoles={['manager','employee','cashier']}><Cashier /></ProtectedRoute>} />
+      <Route path="/cashier" element={<ProtectedRoute allowedRoles={['Manager','Employee','Cashier']}><Cashier /></ProtectedRoute>} />
       {/* Protect manager view from unauthorized access */}
-      <Route path="/manager" element={<ProtectedRoute allowedRoles={['manager']}><Manager /></ProtectedRoute>} />
+      <Route path="/manager" element={<ProtectedRoute allowedRoles={['Manager']}><Manager /></ProtectedRoute>} />
       <Route path="/inventory-board" element={<InventoryBoard />} />
       <Route path="/kitchen-board" element={<KitchenBoard />} />
       <Route path="/unauthorized" element={<Unauthorized />} />
