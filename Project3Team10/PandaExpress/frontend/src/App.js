@@ -6,7 +6,6 @@ import InventoryBoard from "./ManagerView/InventoryBoard";
 import KitchenBoard from "./ManagerView/KitchenBoard";
 import Customer from "./CustomerKiosk/Customer";
 import LandingPage from "./LandingPage.js/LandingPage";
-import ProtectedRoute from "./frontendProtection/ProtectedRoute";
 
 function Unauthorized() {
   return (
@@ -26,10 +25,10 @@ function App() {
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/customer" element={<Customer />} />
-      {/* Protected cashier view - requires authentication */}
-      <Route path="/cashier" element={<ProtectedRoute allowedRoles={['manager','employee','cashier']}><Cashier /></ProtectedRoute>} />
-      {/* Protected manager view - requires manager role */}
-      <Route path="/manager" element={<ProtectedRoute allowedRoles={['manager']}><Manager /></ProtectedRoute>} />
+      {/* Cashier view - backend handles authentication via OAuth */}
+      <Route path="/cashier" element={<Cashier />} />
+      {/* Manager view - backend handles authentication via OAuth */}
+      <Route path="/manager" element={<Manager />} />
       <Route path="/inventory-board" element={<InventoryBoard />} />
       <Route path="/kitchen-board" element={<KitchenBoard />} />
       <Route path="/unauthorized" element={<Unauthorized />} />

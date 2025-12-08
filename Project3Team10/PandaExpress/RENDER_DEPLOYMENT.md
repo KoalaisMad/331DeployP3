@@ -72,7 +72,13 @@ Before deploying, you need to update your Google OAuth configuration:
 
 In your service settings, add these environment variables:
 
-**Note:** Since frontend and backend are served from the same origin, you don't need `FRONTEND_URL` or `REACT_APP_BACKEND_URL` environment variables.
+| Variable | Value | Description |
+|----------|-------|-------------|
+| `NODE_ENV` | `production` | Sets Node.js environment to production mode |
+| `BACKEND_URL` | `https://panda-express-app.onrender.com` | OAuth callback URL (replace with your actual Render URL) |
+| `FRONTEND_URL` | `https://panda-express-app.onrender.com` | Frontend origin for redirects |
+
+**Note about BACKEND_URL:** This is critical for Google OAuth to work. It must match your deployed Render URL exactly (including the domain name).
 
 ### 5. Verify Database Connectivity
 

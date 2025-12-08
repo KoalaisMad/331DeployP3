@@ -53,41 +53,20 @@ router.get("/auth/google",
     passport.authenticate("google", {scope: ["profile", "email"], prompt: 'select_account'}));
     // Add: // prompt: 'selected_account' // to the end if want to bring back login screen 
 
-// If authentication is not successful, goes back to home page. If successful, go to profile route
+// If authentication is not successful, goes back to home page. If successful, redirect to requested view
 router.get("/auth/google/callback", passport.authenticate('google', {failureRedirect: `${FRONTEND_ORIGIN}/unauthorized`}), (req, res) => {
-    // res.redirect('http://localhost:3000/profile');
-    let redirectUrl = `${FRONTEND_ORIGIN}/unauthorized`;
-
-    // Obtain view from session
-    const intendedView = req.query.state;
-    const userRole = req.user && req.user.role ? req.user.role.toLowerCase().trim() : '';
-    
     console.log('=== OAuth Callback Debug ===');
-    console.log('Intended View:', intendedView);
-    console.log('User Role:', userRole);
+    console.log('User authenticated:', req.isAuthenticated());
     console.log('User object:', JSON.stringify(req.user, null, 2));
+    console.log('User role:', req.user?.role);
     console.log('Session ID:', req.sessionID);
-    console.log('Is Authenticated:', req.isAuthenticated());
-    
-    if(intendedView === 'manager' && userRole === 'manager') {
-        redirectUrl = `${FRONTEND_ORIGIN}/manager`;
-    }
-    else if(intendedView === 'cashier' && (userRole === 'employee' || userRole === 'manager')) {
-        redirectUrl = `${FRONTEND_ORIGIN}/cashier`;
-    }
-    console.log('Redirect URL:', redirectUrl);
     console.log('=== End OAuth Callback Debug ===');
-
-    // Save session before redirect to ensure it persists
-    req.session.save((err) => {
-        if (err) {
-            console.error('Session save error:', err);
-            return res.redirect(`${FRONTEND_ORIGIN}/unauthorized`);
-        }
-        // Clean up cookie data
-        delete req.session.intendedView;
-        res.redirect(redirectUrl);
-    });
+    
+    // Get requested view from state parameter
+    const state = req.query.state || 'manager';
+    const redirectPath = (state === 'cashier') ? '/cashier' : '/manager';
+    
+    res.redirect(`${FRONTEND_ORIGIN}${redirectPath}`);
 });
 
 // For debugging
