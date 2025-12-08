@@ -7,13 +7,8 @@ const router = express.Router();
 
 
 
-/**
- * Route to get all employees ordered by ID.
- * @name GET /api/employees
- * @function
- * @param {Object} req - Express request object.
- * @param {Object} res - Express response object.
- */
+// Example route that queries data
+// Mounted at /api/employees -> GET /api/employees
 router.get("/", async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM employees ORDER by id");
@@ -24,13 +19,8 @@ router.get("/", async (req, res) => {
   }
 });
 
-/**
- * Route to update an employee's name, role, or email.
- * @name PUT /api/employees
- * @function
- * @param {Object} req - Express request object.
- * @param {Object} res - Express response object.
- */
+// Update an employee's name or role
+// Update an employee's name or role -> PUT /api/employees
 router.put("/", async (req, res) => {
   try {
     const { employee, property, newValue } = req.body;
@@ -63,13 +53,8 @@ router.put("/", async (req, res) => {
   }
   });
 
-/**
- * Route to delete an employee by ID.
- * @name DELETE /api/employees
- * @function
- * @param {Object} req - Express request object.
- * @param {Object} res - Express response object.
- */
+// Delete employee
+// DELETE /api/employees
 router.delete("/", async(req, res) => {
 try {
     const employee = req.body; 
@@ -86,13 +71,8 @@ try {
 }
 });
 
-/**
- * Route to add a new employee.
- * @name POST /api/employees
- * @function
- * @param {Object} req - Express request object.
- * @param {Object} res - Express response object.
- */
+// Adding employee
+// POST /api/employees
 router.post("/", async(req, res) => {
 try {
     const employee = req.body;
@@ -108,13 +88,8 @@ try {
 }
 });
 
-/**
- * Route to update employee details (email, phone, address, age, role).
- * @name PUT /api/employees/details
- * @function
- * @param {Object} req - Express request object.
- * @param {Object} res - Express response object.
- */
+// Update employee details (email, phone, address, age, role)
+// PUT /api/employees/details
 router.put("/details", async (req, res) => {
   try {
     const { id, email, phone, address, age, role } = req.body;
