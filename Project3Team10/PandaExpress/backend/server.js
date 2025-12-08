@@ -108,6 +108,7 @@ app.get('/health', async (req, res) => {
       status: 'healthy',
       timestamp: new Date().toISOString(),
       environment: process.env.NODE_ENV || 'development',
+      backendUrl: process.env.BACKEND_URL || 'not set',
       database: {
         connected: true,
         timestamp: dbResult.rows[0].now
