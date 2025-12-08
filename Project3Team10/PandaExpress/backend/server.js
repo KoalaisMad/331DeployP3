@@ -145,12 +145,6 @@ pool.query("SELECT NOW()", (err, result) => {
   else console.log("Connected to database at:", result.rows[0].now);
 });
 
-// Catch-all handler to serve React's index.html for any unknown routes
-// This must be AFTER all API routes to allow React Router to handle client-side routing
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
-});
-
 // single app.listen (remove duplicates in original)
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
