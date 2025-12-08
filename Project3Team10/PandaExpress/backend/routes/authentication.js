@@ -53,7 +53,7 @@ router.get("/auth/google",
     passport.authenticate("google", {scope: ["profile", "email"], prompt: 'select_account'}));
     // Add: // prompt: 'selected_account' // to the end if want to bring back login screen 
 
-// If authentication is not successful, goes back to home page. If successful, redirect to requested view
+// If authentication is not successful, goes back to home page. If successful, validate role and redirect
 router.get("/auth/google/callback", passport.authenticate('google', {failureRedirect: `${FRONTEND_ORIGIN}/unauthorized`}), (req, res) => {
     console.log('=== OAuth Callback Debug ===');
     console.log('User authenticated:', req.isAuthenticated());
@@ -64,9 +64,18 @@ router.get("/auth/google/callback", passport.authenticate('google', {failureRedi
     
     // Get requested view from state parameter
     const state = req.query.state || 'manager';
-    const redirectPath = (state === 'cashier') ? '/cashier' : '/manager';
+    const userRole = req.user?.role ? req.user.role.toLowerCase().trim() : '';
     
-    res.redirect(`${FRONTEND_ORIGIN}${redirectPath}`);
+    // Validate user has appropriate role
+    let redirectPath = `${FRONTEND_ORIGIN}/unauthorized`;
+    
+    if (state === 'manager' && userRole === 'manager') {
+        redirectPath = `${FRONTEND_ORIGIN}/manager`;
+    } else if (state === 'cashier' && (userRole === 'manager' || userRole === 'employee' || userRole === 'cashier')) {
+        redirectPath = `${FRONTEND_ORIGIN}/cashier`;
+    }
+    
+    res.redirect(redirectPath);
 });
 
 // For debugging
