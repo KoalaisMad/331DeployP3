@@ -84,27 +84,7 @@ app.use(passport.initialize());
 // Makes sure it integrates with express session so users can stay logged in
 app.use(passport.session())
 
-// mount routers
-app.use("/api/employees", employeesRouter);
-app.use("/api/inventory", inventoryRouter);
-app.use("/api/orders", ordersRouter);
-app.use("/api/reports", reportsRouter);
-app.use("/api/kitchen", kitchenRouter);
-app.use("/api/images", imagesRouter);
-app.use("/api/link", linksRouter);
-
-// Compatibility: mount inventory routes at top-level /api so older frontend
-// requests like `/api/sizes` or `/api/sides` continue to work without
-// rebuilding the frontend bundle.
-app.use("/api", inventoryRouter);
-// Compatibility for legacy image endpoints such as `/api/food-image/:id`
-// Mount the images router at top-level `/api` as well so existing
-// frontend code that references `/api/food-image/:id` continues to work.
-app.use("/api", imagesRouter);
-
-app.use("/", authenticationRouter);
-
-// Health check endpoint (must be before catch-all route)
+// Health check endpoint (must be defined early)
 app.get('/health', async (req, res) => {
   try {
     // Check database connection
@@ -131,6 +111,27 @@ app.get('/health', async (req, res) => {
     });
   }
 });
+
+// Mount authentication routes (OAuth, login, logout)
+app.use("/", authenticationRouter);
+
+// mount API routers
+app.use("/api/employees", employeesRouter);
+app.use("/api/inventory", inventoryRouter);
+app.use("/api/orders", ordersRouter);
+app.use("/api/reports", reportsRouter);
+app.use("/api/kitchen", kitchenRouter);
+app.use("/api/images", imagesRouter);
+app.use("/api/link", linksRouter);
+
+// Compatibility: mount inventory routes at top-level /api so older frontend
+// requests like `/api/sizes` or `/api/sides` continue to work without
+// rebuilding the frontend bundle.
+app.use("/api", inventoryRouter);
+// Compatibility for legacy image endpoints such as `/api/food-image/:id`
+// Mount the images router at top-level `/api` as well so existing
+// frontend code that references `/api/food-image/:id` continues to work.
+app.use("/api", imagesRouter);
 
 // Catch-all handler: serve React app for any route not handled by API
 // MUST be LAST route - handles client-side routing
