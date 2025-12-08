@@ -66,9 +66,12 @@ app.use(session({
     cookie: {
       // Cookie expires in 24 hours (maxAge is in milliseconds)
       maxAge: 1000 * 60 * 60 * 24,
+      // In production, use secure cookies since Render provides HTTPS
       secure: process.env.NODE_ENV === 'production',
       httpOnly: true,
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+      // Use 'lax' sameSite since frontend and backend are served from same origin
+      // This allows cookies to work with OAuth redirects while maintaining security
+      sameSite: 'lax'
     }
 }));
 
