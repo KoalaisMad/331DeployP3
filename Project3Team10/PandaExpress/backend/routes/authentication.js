@@ -60,14 +60,18 @@ router.get("/auth/google/callback", passport.authenticate('google', {failureRedi
 
     // Obtain view from session
     const intendedView = req.query.state;
-    console.log(intendedView);
-    if(intendedView === 'manager' && req.user.role.toLowerCase() === 'manager') {
+    const userRole = req.user && req.user.role ? req.user.role.toLowerCase().trim() : '';
+    
+    console.log('OAuth Callback - View:', intendedView, 'User Role:', userRole);
+    console.log('User object:', req.user);
+    
+    if(intendedView === 'manager' && userRole === 'manager') {
         redirectUrl = `${FRONTEND_ORIGIN}/manager`;
     }
-    else if(intendedView === 'cashier' && (req.user.role.toLowerCase() === 'employee' || req.user.role.toLowerCase() === 'manager')) {
+    else if(intendedView === 'cashier' && (userRole === 'employee' || userRole === 'manager')) {
         redirectUrl = `${FRONTEND_ORIGIN}/cashier`;
     }
-    console.log(redirectUrl);
+    console.log('Redirecting to:', redirectUrl);
 
     // Clean up cookie data
     delete req.session.intendedView;
