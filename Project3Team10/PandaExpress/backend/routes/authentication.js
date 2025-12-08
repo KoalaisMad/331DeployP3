@@ -62,8 +62,12 @@ router.get("/auth/google/callback", passport.authenticate('google', {failureRedi
     const intendedView = req.query.state;
     const userRole = req.user && req.user.role ? req.user.role.toLowerCase().trim() : '';
     
-    console.log('OAuth Callback - View:', intendedView, 'User Role:', userRole);
-    console.log('User object:', req.user);
+    console.log('=== OAuth Callback Debug ===');
+    console.log('Intended View:', intendedView);
+    console.log('User Role:', userRole);
+    console.log('User object:', JSON.stringify(req.user, null, 2));
+    console.log('Session ID:', req.sessionID);
+    console.log('Is Authenticated:', req.isAuthenticated());
     
     if(intendedView === 'manager' && userRole === 'manager') {
         redirectUrl = `${FRONTEND_ORIGIN}/manager`;
@@ -71,11 +75,19 @@ router.get("/auth/google/callback", passport.authenticate('google', {failureRedi
     else if(intendedView === 'cashier' && (userRole === 'employee' || userRole === 'manager')) {
         redirectUrl = `${FRONTEND_ORIGIN}/cashier`;
     }
-    console.log('Redirecting to:', redirectUrl);
+    console.log('Redirect URL:', redirectUrl);
+    console.log('=== End OAuth Callback Debug ===');
 
-    // Clean up cookie data
-    delete req.session.intendedView;
-    res.redirect(redirectUrl);
+    // Save session before redirect to ensure it persists
+    req.session.save((err) => {
+        if (err) {
+            console.error('Session save error:', err);
+            return res.redirect(`${FRONTEND_ORIGIN}/unauthorized`);
+        }
+        // Clean up cookie data
+        delete req.session.intendedView;
+        res.redirect(redirectUrl);
+    });
 });
 
 // For debugging

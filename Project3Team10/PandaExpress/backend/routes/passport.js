@@ -46,7 +46,8 @@ async function(request, accessToken, refreshToken, profile, done) {
             const newUser = await pool.query("INSERT INTO employees (name, role, google_id, email) VALUES ($1, $2, $3, $4) RETURNING *", [profile.displayName, defaultRole, profile.id, email]);
             console.log("New user created with default 'Customer' role. Manager needs to change access if needed.");
 
-            return done(null, profile);
+            // Return the newly created user from database (not the Google profile)
+            return done(null, newUser.rows[0]);
         }
 }
 ));
